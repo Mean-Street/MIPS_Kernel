@@ -1,6 +1,8 @@
 #ifndef __CONSOLE_H__
 #define __CONSOLE_H__
 
+#include <inttypes.h>
+
 typedef struct pos_curseur {
 	uint32_t lig;
 	uint32_t col;

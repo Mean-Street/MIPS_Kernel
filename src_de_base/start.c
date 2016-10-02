@@ -21,12 +21,10 @@ uint32_t fact(uint32_t n)
 
 void kernel_start(void)
 {
-    /* uint32_t x = fact(5); */
-    // quand on saura gerer l'ecran, on pourra afficher x
-    /* (void)x; */
     // on ne doit jamais sortir de kernel_start
-	/* printf("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta laoreet nibh at feugiat. Phasellus non urna volutpat, condimentum felis id, vestibulum neque. Maecenas consequat justo sit amet justo pellentesque, at bibendum purus porta. Sed in suscipit quam."); */
-	printf("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean porta laoreet nibh at feugiat. Phasellus non urna volutpat, condimentum felis id, vestibulum neque.");
+	printf("1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nAenean porta laoreet nibh at feugiat.\nPhasellus non urna volutpat, condimentum felis id, vestibulum neque.\nMaecenas consequat justo sit amet justo pellentesque, at bibendum purus porta.\n\nSed in suscipit quam. 1\n\n\n");
+	printf("2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nAenean porta laoreet nibh at feugiat.\nPhasellus non urna volutpat, condimentum felis id, vestibulum neque.\nMaecenas consequat justo sit amet justo pellentesque, at bibendum purus porta.\n\nSed in suscipit quam. 2\n\n\n");
+	printf("3 Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nAenean porta laoreet nibh at feugiat.\nPhasellus non urna volutpat, condimentum felis id, vestibulum neque.\nMaecenas consequat justo sit amet justo pellentesque, at bibendum purus porta.\n\nSed in suscipit quam. 3");
     while (1) {
         // cette fonction arrete le processeur
         hlt();
