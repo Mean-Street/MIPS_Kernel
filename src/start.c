@@ -4,27 +4,22 @@
 #include <stdlib.h>
 
 #include <console.h>
-// on peut s'entrainer a utiliser GDB avec ce code de base
-// par exemple afficher les valeurs de x, n et res avec la commande display
-
-// une fonction bien connue
-uint32_t fact(uint32_t n)
-{
-    uint32_t res;
-    if (n <= 1) {
-        res = 1;
-    } else {
-        res = fact(n - 1) * n;
-    }
-    return res;
-}
+#include <init_temps.h>
 
 void kernel_start(void)
-{
     // on ne doit jamais sortir de kernel_start
+{
+	init_traitant_IT(32, traitant_IT_32);
+	init_horloge();
+	masque_IRQ(0, 1);
 	printf("1 Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nAenean porta laoreet nibh at feugiat.\nPhasellus non urna volutpat, condimentum felis id, vestibulum neque.\nMaecenas consequat justo sit amet justo pellentesque, at bibendum purus porta.\n\nSed in suscipit quam. 1\n\n\n");
 	printf("2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nAenean porta laoreet nibh at feugiat.\nPhasellus non urna volutpat, condimentum felis id, vestibulum neque.\nMaecenas consequat justo sit amet justo pellentesque, at bibendum purus porta.\n\nSed in suscipit quam. 2\n\n\n");
 	printf("3 Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nAenean porta laoreet nibh at feugiat.\nPhasellus non urna volutpat, condimentum felis id, vestibulum neque.\nMaecenas consequat justo sit amet justo pellentesque, at bibendum purus porta.\n\nSed in suscipit quam. 3");
+
+	// démasquage des interruptions externes
+	sti();
+
+	// boucle d'attente
     while (1) {
         // cette fonction arrete le processeur
         hlt();

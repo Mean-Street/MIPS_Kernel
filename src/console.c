@@ -3,6 +3,7 @@
 #include <cpu.h>
 #include <stddef.h>
 #include <string.h>
+#include <stdio.h>
 
 #define MEMORY_BEGIN 0xB8000
 #define NB_LIG 25
@@ -12,6 +13,13 @@
 #define DATA_PORT 0x3D5
 #define LOW 0x0F
 #define HIGH 0x0E
+
+
+uint32_t nb_IT = 0;
+uint32_t nb_sec = 0;
+uint32_t nb_min = 0;
+uint32_t nb_heu = 0;
+
 
 uint16_t *ptr_mem(uint32_t lig, uint32_t col)
 	// Renvoit un pointeur sur la case mémoire correspondant aux coordonnées
@@ -28,8 +36,9 @@ void ecrit_car(uint32_t lig, uint32_t col, char c, uint8_t colors)
 }
 
 
-void efface_ligne(uint32_t lig) {
+void efface_ligne(uint32_t lig)
 	// Efface la ligne lig de l'écran
+{
 	for (uint32_t col = 0; col < NB_COL; col++) {
 		ecrit_car(lig, col, ' ', 0x0F);
 	}
@@ -132,6 +141,54 @@ void traite_car(char c, uint8_t colors)
 	}
 
 	place_curseur(curseur.lig, curseur.col);
+}
+
+
+
+void ecrit_temps(const char* s)
+{
+	size_t len = strlen(s);
+	if (len > NB_COL)
+		len = NB_COL;
+
+	uint32_t col = NB_COL - 1;
+	for (int32_t i = len-1; i >= 0; i--) {
+		ecrit_car(0, col, s[i], 0x0F);
+		col--;
+	}
+}
+
+
+void tic_PIT(void)
+{
+	// liberation du controleur d'interruption
+	outb(0x20, 0x20);
+
+	// gestion de l'interruption
+	nb_IT++;
+	if (nb_IT == CLOCKFREQ) {
+		nb_IT = 0;
+		nb_sec++;
+		if (nb_sec == 60) {
+			nb_sec = 0;
+			nb_min++;
+			if (nb_min == 60) {
+				nb_min = 0;
+				nb_heu++;
+			}
+		}
+	}
+
+	// SOMETHING HERE DOESNT WORK
+	// calcul de l'affichage
+	char* s = "00:00:0";
+	s[0] = nb_sec/10;
+	s[1] = nb_sec%10;
+	s[3] = nb_min/10;
+	s[4] = nb_min%10;
+	s[6] = nb_heu/10;
+	s[7] = nb_heu%10;
+	ecrit_temps(s);
 }
 
 

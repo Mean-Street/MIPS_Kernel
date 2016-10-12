@@ -25,7 +25,7 @@ QEMUOPTS = -cpu pentium -rtc base=localtime -m 64M -gdb tcp::1234 -S -kernel ker
 QEMUOPTS_WITHOUT_GDB = -cpu pentium -rtc base=localtime -m 64M -kernel kernel.bin
 
 # cible principale, on nettoie systematiquement le repertoire avant
-.PHONY: all
+.PHONY: all, clean, run, debug
 all: clean kernel.bin
 
 # ecran affichant les exceptions

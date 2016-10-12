@@ -3,6 +3,8 @@
 
 #include <inttypes.h>
 
+#define CLOCKFREQ 20
+
 typedef struct pos_curseur {
 	uint32_t lig;
 	uint32_t col;
@@ -11,6 +13,8 @@ typedef struct pos_curseur {
  * This is the function called by printf to send its output to the screen. You
  * have to implement it in the kernel and in the user program.
  */
+void ecrit_temps(const char* s);
+
 extern void console_putbytes(const char *s, int len);
 
 #endif
