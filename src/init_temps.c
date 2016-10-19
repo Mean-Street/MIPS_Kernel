@@ -28,10 +28,11 @@ void masque_IRQ(uint32_t num_IRQ, bool masque)
 {
 	uint8_t a = inb(0x21);
 	uint8_t m = 0x01 << num_IRQ;
-	if (masque == 1) {
+	if (masque == 0) {
 		a = a | m;
 	} else {
-		a = a | (~m);
+		a = a & (~m);
 	}
-	outb(0xFE, 0x21);
+	/* outb(0xFE, 0x21); */
+	outb(a, 0x21);
 }
