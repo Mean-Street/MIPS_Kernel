@@ -181,14 +181,11 @@ void tic_PIT(void)
 
 	// calcul de l'affichage
 	char s[9];
-	sprintf(&(s[0]), "%01d", nb_heu/10);
-	sprintf(&(s[1]), "%01d", nb_heu%10);
+	sprintf(&(s[0]), "%02d", nb_heu);
 	s[2] = ':';
-	sprintf(&(s[3]), "%01d", nb_min/10);
-	sprintf(&(s[4]), "%01d", nb_min%10);
+	sprintf(&(s[3]), "%02d", nb_min);
 	s[5] = ':';
-	sprintf(&(s[6]), "%01d", nb_sec/10);
-	sprintf(&(s[7]), "%01d", nb_sec%10);
+	sprintf(&(s[6]), "%02d", nb_sec);
 	ecrit_temps(s);
 }
 

@@ -3,6 +3,8 @@
 #include <cpu.h>
 #include <stdbool.h>
 
+#include <stdio.h>
+
 #define table_IT 0x1000
 #define QUARTZ 0x1234DD
 #define CLOCKPORT 0x40
@@ -27,12 +29,10 @@ void init_horloge(void)
 void masque_IRQ(uint32_t num_IRQ, bool masque)
 {
 	uint8_t a = inb(0x21);
-	uint8_t m = 0x01 << num_IRQ;
-	if (masque == 0) {
-		a = a | m;
+	if (masque) {
+		a = a | (0x01 << num_IRQ);
 	} else {
-		a = a & (~m);
+		a = a & ~(0x01 << num_IRQ);
 	}
-	/* outb(0xFE, 0x21); */
 	outb(a, 0x21);
 }

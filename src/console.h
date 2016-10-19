@@ -3,7 +3,7 @@
 
 #include <inttypes.h>
 
-#define CLOCKFREQ 20
+#define CLOCKFREQ 50
 
 typedef struct pos_curseur {
 	uint32_t lig;
