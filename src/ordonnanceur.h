@@ -18,9 +18,6 @@ typedef struct processus {
 	int32_t pile[TAILLE_PILE];
 } processus;
 
-processus TAB_PROC[NB_PROC];
-
-
 
 void init_idle(void);
 
@@ -31,7 +28,5 @@ void ctx_sw(int32_t* old_reg, int32_t* new_reg);
 void idle(void);
 
 void proc1(void);
-
-void ordonnance (void);
 
 #endif

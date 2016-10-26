@@ -2,6 +2,8 @@
 #include <string.h>
 #include <cpu.h>
 
+processus TAB_PROC[NB_PROC];
+
 int PROC_CURR;
 
 void init_idle(void)
@@ -21,6 +23,15 @@ void init_proc1(void)
 	TAB_PROC[1].pile[TAILLE_PILE-1] = (int32_t)proc1;
 }
 
+char* mon_nom(void)
+{
+	return TAB_PROC[PROC_CURR].nom;
+}
+
+int mon_pid(void)
+{
+	return TAB_PROC[PROC_CURR].pid;
+}
 
 void ordonnance(void)
 {
@@ -35,7 +46,7 @@ void ordonnance(void)
 void idle(void)
 {
 	for (;;) {
-		printf("[%s] pid = %i\n", "idle", 0);
+		printf("[%s] pid = %i\n", mon_nom(), mon_pid());
 		ordonnance();
 	}
 }
@@ -44,7 +55,7 @@ void idle(void)
 void proc1(void)
 {
 	for (;;) {
-		printf("[%s] pid = %i\n", "proc1", 1);
+		printf("[%s] pid = %i\n", mon_nom(), mon_pid());
 		ordonnance();
 	}
 }
