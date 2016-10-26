@@ -22,14 +22,16 @@ processus TAB_PROC[NB_PROC];
 
 
 
-void init_idle(processus* tab_proc);
+void init_idle(void);
 
-void init_proc1(processus* tab_proc);
+void init_proc1(void);
 
 void ctx_sw(int32_t* old_reg, int32_t* new_reg);
 
 void idle(void);
 
 void proc1(void);
+
+void ordonnance (void);
 
 #endif

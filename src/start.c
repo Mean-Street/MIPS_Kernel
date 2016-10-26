@@ -17,8 +17,8 @@ void kernel_start(void)
 	/* printf("2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nAenean porta laoreet nibh at feugiat.\nPhasellus non urna volutpat, condimentum felis id, vestibulum neque.\nMaecenas consequat justo sit amet justo pellentesque, at bibendum purus porta.\n\nSed in suscipit quam. 2\n\n\n"); */
 	/* printf("3 Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nAenean porta laoreet nibh at feugiat.\nPhasellus non urna volutpat, condimentum felis id, vestibulum neque.\nMaecenas consequat justo sit amet justo pellentesque, at bibendum purus porta.\n\nSed in suscipit quam. 3"); */
 
-	init_idle(TAB_PROC);
-	init_proc1(TAB_PROC);
+	init_idle();
+	init_proc1();
 
 	// démasquage des interruptions externes
 	/* sti(); */
