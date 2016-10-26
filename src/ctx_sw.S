@@ -21,3 +21,5 @@ ctx_sw:
     # on passe la main au nouveau processus
     ret
 
+
+# movl %a, %b = move the contents of the register a into the register b
