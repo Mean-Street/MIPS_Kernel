@@ -8,7 +8,6 @@
 
 enum etat = {ELU, ACTIVABLE};
 
-
 typedef struct processus {
 	int32_t pid;
 	char[20] nom;
@@ -18,5 +17,9 @@ typedef struct processus {
 } processus;
 
 processus[NB_PROC] TAB_PROC;
+
+
+void idle(void);
+void proc1(void);
 
 #endif
