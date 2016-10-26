@@ -48,7 +48,7 @@ void efface_ecran(void)
 	// Ecrit dans chaque case un espace en blanc sur fond noir
 {
 	for (uint32_t lig = 0; lig < NB_LIG; lig++) {
-		efface_ligne(lig);
+		_ligne(lig);
 	}
 }
 
@@ -83,8 +83,8 @@ void defilement(void)
 	// Fait remonter d'une ligne l'affichage de l'écran
 {
 	void* deuxieme_ligne = ptr_mem(1, 0);
-	size_t size = NB_COL * (NB_LIG-1) * 2;
-	memmove((void*)MEMORY_BEGIN, deuxieme_ligne, size);
+	size_t taille = NB_COL * (NB_LIG-1) * 2;
+	memmove((void*)MEMORY_BEGIN, deuxieme_ligne, taille);
 	efface_ligne(NB_LIG - 1);
 }
 
