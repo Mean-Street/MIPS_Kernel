@@ -2,6 +2,11 @@
 #define __CONSOLE_H__
 
 #include <inttypes.h>
+#include <cpu.h>
+#include <stddef.h>
+#include <string.h>
+#include <stdio.h>
+#include <ordonnanceur.h>
 
 #define CLOCKFREQ 50
 

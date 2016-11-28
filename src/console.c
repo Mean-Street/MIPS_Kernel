@@ -1,9 +1,4 @@
-#include <inttypes.h>
 #include <console.h>
-#include <cpu.h>
-#include <stddef.h>
-#include <string.h>
-#include <stdio.h>
 
 #define MEMORY_BEGIN 0xB8000
 #define NB_LIG 25
@@ -187,6 +182,7 @@ void tic_PIT(void)
 	s[5] = ':';
 	sprintf(&(s[6]), "%02d", nb_sec);
 	ecrit_temps(s);
+	ordonnance();
 }
 
 

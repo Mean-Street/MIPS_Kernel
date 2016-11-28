@@ -30,7 +30,7 @@ void kernel_start(void)
 	// démasquage des interruptions externes
 	/* sti(); */
 
-	ordonnance();
+	idle();
 
 	// boucle d'attente
     while (1) {

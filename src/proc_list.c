@@ -2,6 +2,7 @@
 
 void add_queue(proc_list* l, processus* proc)
 {
+	proc->etat_courant = ACTIVABLE;
 	proc->suiv = NULL;
 	if (l->len == 0) {
 		l->tete = proc;
@@ -19,13 +20,11 @@ processus* pop_tete(proc_list* l)
 		return NULL;
 	
 	processus* tmp = l->tete;
-	if (l->len == 1) {
-		l->tete = NULL;
+	l->tete = tmp->suiv;
+	if (l->len == 1)
 		l->queue = NULL;
-	} else {
-		l->tete = tmp->suiv;
-	}
 	l->len--;
+	tmp->etat_courant = ELU;
 	return tmp;
 }
 
