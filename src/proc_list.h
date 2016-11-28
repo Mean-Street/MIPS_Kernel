@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stddef.h>
 
-enum etat {ELU, ACTIVABLE};
+enum etat {ELU, ACTIVABLE, ENDORMI};
 
 typedef struct processus {
 	int32_t pid;
@@ -16,18 +16,26 @@ typedef struct processus {
 	struct processus* suiv;
 } processus;
 
-typedef struct proc_list {
+
+typedef struct list_activable {
 	int len;
 	processus* tete;
 	processus* queue;
-} proc_list;
+} list_activable;
+
+
+typedef struct list_endormi {
+	int len;
+	processus* tete;
+	processus* queue;
+} list_endormi;
 
 
 
-void add_queue(proc_list* l, processus* proc);
+void add_queue(list_activable* l, processus* proc);
 
-processus* pop_tete(proc_list* l);
+processus* pop_tete(list_activable* l);
 
-void disp_list(proc_list* l);
+void disp_list(list_activable* l);
 
 #endif

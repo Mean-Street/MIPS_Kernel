@@ -1,17 +1,15 @@
 #include <ordonnanceur.h>
 #include <malloc.c.h>
-#include <string.h>
-#include <cpu.h>
 
 
-proc_list* liste_activable = NULL;
+list_activable* activable = NULL;
 processus* elu = NULL;
 
 int NB_PROC = 0;
 
-proc_list* init_list(void)
+list_activable* init_list(void)
 {
-	proc_list* l = malloc(sizeof(proc_list));
+	list_activable* l = malloc(sizeof(list_activable));
 	l->len = 0;
 	l->tete = NULL;
 	l->queue = NULL;
@@ -29,7 +27,7 @@ void init_idle(char* nom)
 	elu = proc;
 	NB_PROC++;
 	
-	liste_activable = init_list();
+	activable = init_list();
 }
 
 int32_t cree_processus(void (*code)(void), char* nom)
@@ -45,7 +43,7 @@ int32_t cree_processus(void (*code)(void), char* nom)
 	proc->etat_courant = ACTIVABLE;
 	proc->sauv_reg[1] = (int32_t)&(proc->pile[TAILLE_PILE-1]);
 	proc->pile[TAILLE_PILE-1] = (int32_t)code;
-	add_queue(liste_activable, proc);
+	add_queue(activable, proc);
 	return NB_PROC++;
 }
 
@@ -62,11 +60,11 @@ int mon_pid(void)
 void ordonnance(void)
 {
 	processus* courant = elu;
-	processus* suivant = pop_tete(liste_activable);
+	processus* suivant = pop_tete(activable);
 
 	suivant->etat_courant = ELU;
 	elu->etat_courant = ACTIVABLE;
-	add_queue(liste_activable, elu);
+	add_queue(activable, elu);
 	elu = suivant;
 
 	ctx_sw(courant->sauv_reg, suivant->sauv_reg);

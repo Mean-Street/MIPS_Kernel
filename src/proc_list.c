@@ -1,6 +1,6 @@
 #include <proc_list.h>
 
-void add_queue(proc_list* l, processus* proc)
+void add_queue(list_activable* l, processus* proc)
 {
 	proc->etat_courant = ACTIVABLE;
 	proc->suiv = NULL;
@@ -14,7 +14,7 @@ void add_queue(proc_list* l, processus* proc)
 }
 
 
-processus* pop_tete(proc_list* l)
+processus* pop_tete(list_activable* l)
 {
 	if (l->len == 0)
 		return NULL;
@@ -29,7 +29,7 @@ processus* pop_tete(proc_list* l)
 }
 
 
-void disp_list(proc_list* l) {
+void disp_list(list_activable* l) {
 	processus* tmp = l->tete;
 	printf("Len = %d\n", l->len);
 	while (tmp != NULL) {
