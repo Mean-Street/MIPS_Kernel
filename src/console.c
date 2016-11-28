@@ -48,7 +48,7 @@ void efface_ecran(void)
 	// Ecrit dans chaque case un espace en blanc sur fond noir
 {
 	for (uint32_t lig = 0; lig < NB_LIG; lig++) {
-		_ligne(lig);
+		efface_ligne(lig);
 	}
 }
 

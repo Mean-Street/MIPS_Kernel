@@ -17,12 +17,20 @@ void kernel_start(void)
 	/* printf("2 Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nAenean porta laoreet nibh at feugiat.\nPhasellus non urna volutpat, condimentum felis id, vestibulum neque.\nMaecenas consequat justo sit amet justo pellentesque, at bibendum purus porta.\n\nSed in suscipit quam. 2\n\n\n"); */
 	/* printf("3 Lorem ipsum dolor sit amet, consectetur adipiscing elit.\nAenean porta laoreet nibh at feugiat.\nPhasellus non urna volutpat, condimentum felis id, vestibulum neque.\nMaecenas consequat justo sit amet justo pellentesque, at bibendum purus porta.\n\nSed in suscipit quam. 3"); */
 
-	init_idle();
-	init_proc1();
+	init_idle("idle");
+	cree_processus(proc1, "Process 1");
+	cree_processus(proc1, "Process 2");
+	cree_processus(proc1, "Process 3");
+	cree_processus(proc1, "Process 4");
+	cree_processus(proc1, "Process 5");
+	cree_processus(proc1, "Process 6");
+	cree_processus(proc1, "Process 7");
+	cree_processus(proc1, "Process 8");
 
 	// démasquage des interruptions externes
 	/* sti(); */
-	idle();
+
+	ordonnance();
 
 	// boucle d'attente
     while (1) {
