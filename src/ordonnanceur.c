@@ -79,8 +79,9 @@ int32_t cree_processus(void (*code)(void), char* nom)
 	proc->nom = malloc(sizeof(strlen(nom) + 1));
 	strcpy(proc->nom, nom);
 	proc->etat_courant = ACTIVABLE;
-	proc->sauv_reg[1] = (int32_t)&(proc->pile[TAILLE_PILE-1]);
-	proc->pile[TAILLE_PILE-1] = (int32_t)code;
+	proc->sauv_reg[1] = (int32_t)&(proc->pile[TAILLE_PILE-2]);
+	proc->pile[TAILLE_PILE-1] = (int32_t)fin_processus;
+	proc->pile[TAILLE_PILE-2] = (int32_t)code;
 	proc->temps_reveil = 0;
 	add_queue(L_ACTIVABLE, proc);
 	return NB_PROC++;
@@ -151,7 +152,6 @@ void proc1(void)
 	printf("[temps = %u] processus %s pid = %i\n", nbr_secondes(), mon_nom(), mon_pid());
 	dors(2);
 	printf("End of proc1\n");
-	fin_processus();
 }
 
 void proc2(void)
@@ -159,7 +159,6 @@ void proc2(void)
 	printf("[temps = %u] processus %s pid = %i\n", nbr_secondes(), mon_nom(), mon_pid());
 	dors(3);
 	printf("End of proc2\n");
-	fin_processus();
 }
 
 void proc3(void)
@@ -167,5 +166,4 @@ void proc3(void)
 	printf("[temps = %u] processus %s pid = %i\n", nbr_secondes(), mon_nom(), mon_pid());
 	dors(5);
 	printf("End of proc3\n");
-	fin_processus();
 }
