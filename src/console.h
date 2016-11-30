@@ -10,6 +10,8 @@
 
 #define CLOCKFREQ 50
 
+extern uint32_t TOTAL_TIME;
+
 typedef struct pos_curseur {
 	uint32_t lig;
 	uint32_t col;

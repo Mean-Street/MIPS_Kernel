@@ -11,6 +11,9 @@
 
 
 uint32_t nb_IT = 0;
+
+uint32_t TOTAL_TIME = 0;
+
 uint32_t nb_sec = 0;
 uint32_t nb_min = 0;
 uint32_t nb_heu = 0;
@@ -163,6 +166,7 @@ void tic_PIT(void)
 	nb_IT++;
 	if (nb_IT == CLOCKFREQ) {
 		nb_IT = 0;
+		TOTAL_TIME++;
 		nb_sec++;
 		if (nb_sec == 60) {
 			nb_sec = 0;

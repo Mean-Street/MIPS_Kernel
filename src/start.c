@@ -19,17 +19,18 @@ void kernel_start(void)
 
 	init_idle("idle");
 	cree_processus(proc1, "Process 1");
-	cree_processus(proc1, "Process 2");
-	cree_processus(proc1, "Process 3");
-	cree_processus(proc1, "Process 4");
-	cree_processus(proc1, "Process 5");
-	cree_processus(proc1, "Process 6");
-	cree_processus(proc1, "Process 7");
-	cree_processus(proc1, "Process 8");
+	cree_processus(proc2, "Process 2");
+	cree_processus(proc3, "Process 3");
+	/* cree_processus(proc1, "Process 4"); */
+	/* cree_processus(proc1, "Process 5"); */
+	/* cree_processus(proc1, "Process 6"); */
+	/* cree_processus(proc1, "Process 7"); */
+	/* cree_processus(proc1, "Process 8"); */
 
 	// démasquage des interruptions externes
 	/* sti(); */
 
+	printf("Init 0\n");
 	idle();
 
 	// boucle d'attente
