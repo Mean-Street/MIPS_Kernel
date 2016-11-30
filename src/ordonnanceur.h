@@ -15,9 +15,13 @@
 
 list_activable* init_list(void);
 
+void clear_mourant(list_mourant* l);
+
 void init_idle(char* nom);
 
 int32_t cree_processus(void (*code)(void), char* nom);
+
+void fin_processus(void);
 
 void ordonnance(void);
 

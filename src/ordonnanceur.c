@@ -4,6 +4,7 @@
 
 list_activable* L_ACTIVABLE = NULL;
 list_endormi* L_ENDORMI = NULL;
+list_mourant* L_MOURANT = NULL;
 processus* PROC_ELU = NULL;
 
 int NB_PROC = 0;
@@ -30,6 +31,26 @@ list_endormi* init_list_endormi(void)
 	return l;
 }
 
+list_mourant* init_list_mourant(void)
+{
+	list_mourant* l = malloc(sizeof(list_mourant));
+	l->tete = NULL;
+	return l;
+}
+
+void clear_mourant(list_mourant* l)
+{
+	processus* tmp = l->tete;
+	processus* you_gonna_die = l->tete;
+	while (tmp != NULL) {
+		you_gonna_die = tmp;
+		tmp = tmp->suiv;
+		free(you_gonna_die->nom);
+		free(you_gonna_die->pile);
+		free(you_gonna_die);
+	}
+}
+
 
 void init_idle(char* nom)
 {
@@ -43,6 +64,7 @@ void init_idle(char* nom)
 	
 	L_ACTIVABLE = init_list_activable();
 	L_ENDORMI = init_list_endormi();
+	L_MOURANT = init_list_mourant();
 	TIME_INIT = 0;
 }
 
@@ -64,6 +86,15 @@ int32_t cree_processus(void (*code)(void), char* nom)
 	return NB_PROC++;
 }
 
+void fin_processus(void)
+{
+	processus* courant = PROC_ELU;
+	PROC_ELU = pop_tete(L_ACTIVABLE);
+
+	add_mourant(L_MOURANT, courant);
+	ctx_sw(courant->sauv_reg, PROC_ELU->sauv_reg);
+}
+
 char* mon_nom(void)
 {
 	return PROC_ELU->nom;
@@ -76,6 +107,7 @@ int mon_pid(void)
 
 void ordonnance(void)
 {
+	clear_mourant(L_MOURANT);
 	while (!is_empty(L_ENDORMI) && get_prio(L_ENDORMI) <= TOTAL_TIME) {
 		add_queue(L_ACTIVABLE, pop_prio(L_ENDORMI));
 	}
@@ -96,7 +128,11 @@ void ordonnance(void)
 void dors(uint32_t nbr_secs) {
 	processus* courant = PROC_ELU;
 	add_elt(L_ENDORMI, PROC_ELU, TOTAL_TIME + nbr_secs);
+	// forcément idle dans les activables, car idle n'appelle jamais dors()
 	PROC_ELU = pop_tete(L_ACTIVABLE);
+	if (PROC_ELU == NULL) {
+		printf("THIS SHOULD NEVER HAPPEN !!!!!!!!\n");
+	}
 	ctx_sw(courant->sauv_reg, PROC_ELU->sauv_reg);
 }
 
@@ -112,24 +148,24 @@ void idle(void)
 
 void proc1(void)
 {
-	for (;;) {
-		printf("[temps = %u] processus %s pid = %i\n", nbr_secondes(), mon_nom(), mon_pid());
-		dors(2);
-	}
+	printf("[temps = %u] processus %s pid = %i\n", nbr_secondes(), mon_nom(), mon_pid());
+	dors(2);
+	printf("End of proc1\n");
+	fin_processus();
 }
 
 void proc2(void)
 {
-	for (;;) {
-		printf("[temps = %u] processus %s pid = %i\n", nbr_secondes(), mon_nom(), mon_pid());
-		dors(3);
-	}
+	printf("[temps = %u] processus %s pid = %i\n", nbr_secondes(), mon_nom(), mon_pid());
+	dors(3);
+	printf("End of proc2\n");
+	fin_processus();
 }
 
 void proc3(void)
 {
-	for (;;) {
-		printf("[temps = %u] processus %s pid = %i\n", nbr_secondes(), mon_nom(), mon_pid());
-		dors(5);
-	}
+	printf("[temps = %u] processus %s pid = %i\n", nbr_secondes(), mon_nom(), mon_pid());
+	dors(5);
+	printf("End of proc3\n");
+	fin_processus();
 }

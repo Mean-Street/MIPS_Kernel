@@ -6,7 +6,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 
-enum etat {ELU, ACTIVABLE, ENDORMI};
+enum etat {ELU, ACTIVABLE, ENDORMI, MOURANT};
 
 typedef struct processus {
 	int32_t pid;
@@ -48,5 +48,14 @@ uint32_t get_prio(list_endormi* l);
 processus* pop_prio(list_endormi* l);
 
 void disp_list_endormi(list_endormi* l);
+
+
+/* Liste des processus mourants */
+typedef struct list_mourant {
+	processus* tete;
+} list_mourant;
+
+void add_mourant(list_mourant* l, processus* proc);
+
 
 #endif

@@ -103,3 +103,14 @@ void disp_list_endormi(list_endormi* l)
 	}
 	printf("\n");
 }
+
+
+
+/* Liste des mourants */
+void add_mourant(list_mourant* l, processus* proc)
+{
+	proc->etat_courant = MOURANT;
+	proc->suiv = l->tete;
+	l->tete = proc;
+}
+
